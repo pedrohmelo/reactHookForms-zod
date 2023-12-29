@@ -3,6 +3,8 @@ import '../styles/global.css';
 import { useForm } from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
+import { useNavigate, useNavigation } from 'react-router-dom';
+import HomePage from './HomePage';
 
 //Schema sempre será uma representação de qualquer estrutura de dados
 const createFormSchema = 
@@ -19,8 +21,7 @@ z.object({
             message: 'As senhas não conferem',
         });
     }}
-  ) //Falta mostrar na tela que as senhas não conferem.
-
+  )
 
 type fon = z.infer<typeof createFormSchema>
 
@@ -29,9 +30,13 @@ function LoginPage() {
   const {register, handleSubmit, formState: {errors}} = useForm<fon>(
     {resolver: zodResolver(createFormSchema)}
   );
+
+  const navigate = useNavigate(); //Comentário para saudar o gabriel
+
   const handleLogin = () => {
-    console.log('aaa')
-  }
+    //aplicar validação de credenciais, se validar então vai p/ page
+    navigate('/homepage')
+  };
   
   const [output, setOutput] = useState('');
 

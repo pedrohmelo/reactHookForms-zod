@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { useForm } from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
-import { Navigate } from "react-router-dom";
 
 //Schema sempre será uma representação de qualquer estrutura de dados
 const createFormSchema = 
@@ -30,6 +29,9 @@ function LoginPage() {
   const {register, handleSubmit, formState: {errors}} = useForm<fon>(
     {resolver: zodResolver(createFormSchema)}
   );
+  const handleLogin = () => {
+    console.log('aaa')
+  }
   
   const [output, setOutput] = useState('');
 
@@ -107,7 +109,7 @@ function LoginPage() {
           <button 
             type='submit'
             className='flex flex-row rounded-md px-4 py-2 font-bold bg-red-400 hover:bg-red-600 text-white w-20'
-            
+            onClick={handleLogin}
           >
             Login
           </button>
